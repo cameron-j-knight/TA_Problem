@@ -5,29 +5,35 @@
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main{
 	
 	public static void main(String[] args){
-		int helpTime = 4000;
+		int helpTime = 6000;
 		int cycles = 5;
 		int numStudents = 6;
-		int codintTime = 1000;
-		int gamingTime = 1000:
+		int codintTime = 3000;
+		int gamingTime = 3000;
 		Line line = new Line(helpTime, cycles, numStudents);
 		List<Thread> threads = new ArrayList<Thread>();
 		TA ta = new TA(line, helpTime, gamingTime);
-		Thread thread = new Thread(ta);
-		threads.add(thread);
+		Thread threadier = new Thread(ta);
+		threadier.start();
+		threads.add(threadier);
 		for(int i = 0; i < numStudents; i++){
-			Student student = new Student(line, cycles, "Student " + i);
-			Thread thread = new Thread(student);
-			threads.add(thread);
-			thread.start();
+			Student student = new Student(line, cycles,codintTime, "Student " + i);
+			Thread thready = new Thread(student);
+			threads.add(thready);
+			thready.start();
 		}
 
-		for (Thread thread : threads){
-			thread.join();
+		for (Thread thready : threads){
+			try {
+				thready.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 

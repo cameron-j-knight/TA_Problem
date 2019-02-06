@@ -17,6 +17,9 @@ public class TA implements Runnable{
 
 	public void run() {
 		while(!line.closed()){
+			synchronized(System.out){
+				System.out.println("\t\tTA Earl is playing Tetris");
+			}
 			this.state = "G";
             try {
                 Thread.sleep(gamingTime);
@@ -27,7 +30,6 @@ public class TA implements Runnable{
 			synchronized(System.out){
 				System.out.println("\t\tTA Earl is thinking...");
 			}
-			notifyAll();
 			line.ready();
 		}
 	}

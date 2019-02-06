@@ -24,8 +24,8 @@ public class Line {
     }
 
     public synchronized int request(String name){
+        this.helped++;
         if (this.wait.size() == 3) {
-            this.helped++;
             return 0;
         }
         this.wait.add(Thread.currentThread());
@@ -46,7 +46,7 @@ public class Line {
             }
         }
         synchronized (System.out){
-            System.out.println("\t\t\t" + name + "is being helped");
+            System.out.println("\t\t\t" + name + " is being helped by TA Earl");
         }
         try {
             Thread.sleep(help);
@@ -58,7 +58,7 @@ public class Line {
         return 1;
     }
 
-    public void ready() {
+    public synchronized void ready() {
         ready = true;
         notifyAll();
         while (wait.size() != 0 || this.helping != null){
