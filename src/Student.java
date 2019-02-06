@@ -9,7 +9,7 @@ public class Student implements Runnable{
         this.cycle = n;
         this.ctime = codingTime;
         this.timesHelped = 0;
-        this.name = "";
+        this.name = name;
     }
 
     public void run(){
@@ -23,7 +23,7 @@ public class Student implements Runnable{
             synchronized (System.out) {
                 System.out.println("\tStudent " + name + " is going to get help");
             }
-            if (line.request() == 0){
+            if (line.request(this.name) == 0){
                 synchronized (System.out) {
                     System.out.println("\tStudent " + name + " could not get help line is full");
                 }
